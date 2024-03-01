@@ -1,6 +1,4 @@
-const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const CellPhone = sequelize.define(
     "CellPhone",
     {
@@ -32,19 +30,21 @@ module.exports = (sequelize) => {
     }
   );
 
-  CellPhone.belongsTo(sequelize.models.Model, {
-    foreignKey: "model_id",
-    as: "model",
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
-  });
+  CellPhone.associate = function (models) {
+    CellPhone.belongsTo(models.Model, {
+      foreignKey: "model_id",
+      as: "model",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
 
-  CellPhone.belongsTo(sequelize.models.Brand, {
-    foreignKey: "brand_id",
-    as: "brand",
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
-  });
+    CellPhone.belongsTo(models.Brand, {
+      foreignKey: "brand_id",
+      as: "brand",
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
+    });
+  };
 
   return CellPhone;
 };

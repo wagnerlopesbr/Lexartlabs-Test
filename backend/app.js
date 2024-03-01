@@ -1,5 +1,5 @@
 const express = require("express");
-const globalRouter = express.Router();
+const globalRouter = require("./routes/index");
 const app = express();
 
 app.use(express.json());
