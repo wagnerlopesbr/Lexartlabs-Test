@@ -15,10 +15,11 @@ const findAll = async () => {
           attributes: ["name"],
         },
       ],
-      attributes: ["price", "color"],
+      attributes: ["id", "price", "color"],
     });
 
     const products = productsList.map((product) => ({
+      id: product.id,
       name: `${product.brand.name} ${product.model.name}`,
       brand: product.brand.name,
       model: product.model.name,
