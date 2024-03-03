@@ -2,47 +2,30 @@ import linkedinIcon from "../utils/images/linkedin-icon.png";
 import githubIcon from "../utils/images/github-icon.png";
 import logoutIcon from "../utils/images/logout-icon.png";
 import lexartIcon from "../utils/images/lexart-icon.png";
+import "../css/Header.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const [logged, setLogged] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // localStorage.removeItem("token");
+    setLogged(false);
+    navigate("/");
+  };
+
   return (
-    <div
-      style={{
-        boxShadow: "0px 0px 5px 0px rgba(0,0,0,2)",
-        width: "100%",
-        position: "relative",
-        zIndex: "100",
-      }}
-    >
-      <nav
-        style={{
-          backgroundColor: "black",
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            width: "100%",
-            height: "100%",
-          }}
-        >
+    <div className="header-container">
+      <nav className="nav-bar">
+        <div className="logo-container">
           <a href="https://lexartlabs.com/" rel="noreferrer" target="_blank">
             <img src={lexartIcon} height="20%" alt="lexart icon" />
           </a>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            paddingTop: "3px",
-          }}
-        >
+        <div className="social-icons-container">
           <div style={{ marginRight: "10px" }}>
             <a
               href="https://www.linkedin.com/in/wagnerlopesbr"
@@ -63,28 +46,8 @@ const Header = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <button
-            className="nav-btn"
-            onClick={() => handleLogout(!setLogged)}
-            style={{
-              fontSize: "30px",
-              backgroundColor: "black",
-              border: "none",
-              paddingTop: "3px",
-              paddingRight: "5px",
-              cursor: "pointer",
-            }}
-          >
+        <div className="logout-container">
+          <button className="nav-btn" onClick={() => handleLogout(!setLogged)}>
             <img src={logoutIcon} width="22px" alt="logout icon" />
           </button>
         </div>

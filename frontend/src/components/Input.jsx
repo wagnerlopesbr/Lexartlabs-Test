@@ -1,36 +1,10 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
-import styled from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin-bottom: 15px;
-  width: 100%;
-`;
-
-const FieldStyled = styled.input`
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid;
-  outline: none;
-  font-size: 18px;
-  width: 90%;
-`;
-
-const Label = styled.label`
-  text-transform: capitalize;
-`;
-
-const RequiredLabel = styled.span`
-  color: red;
-`;
-
-const ErrorStyled = styled.span`
-  color: red;
-  font-size: 14px;
-`;
+import Container from "../components/styledComponents/Input/Container";
+import FieldStyled from "../components/styledComponents/Input/FieldStyled";
+import Label from "../components/styledComponents/Input/Label";
+import RequiredLabel from "../components/styledComponents/Input/RequiredLabel";
+import ErrorStyled from "../components/styledComponents/Input/ErrorStyled";
 
 export const Input = ({ name, type = "", label, required, ...props }) => {
   return (

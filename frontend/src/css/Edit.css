@@ -1,0 +1,26 @@
+.edit-menu-btn {
+  position: absolute;
+  top: 331px;
+  right: center;
+  background-color: red;
+  width: 35px;
+  height: 35px;
+  border: none;
+  color: white;
+  padding: 5px 4px 5px 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.edit-menu-btn:hover {
+  background-color: #ff6363;
+  color: black;
+}
+
+.edit-select {
+  padding: 8px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 4px;
+  width: 50%;
+}

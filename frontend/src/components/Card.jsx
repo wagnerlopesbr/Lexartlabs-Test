@@ -1,60 +1,73 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 import defaultProduct from "../../src/utils/images/default-product.png";
-import Container from "./styledComponents/card/Container";
+import "../css/Card.css";
+import Container from "./styledComponents/Card/Container";
+import feather from "feather-icons";
+import { useNavigate } from "react-router-dom";
+import DeletePopup from "./DeletePopup";
 
 const Card = ({ product }) => {
+  const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
   const formattedPrice = product.price.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
+
+  useEffect(() => {
+    feather.replace();
+  }, []);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
-    <Container>
+    <Container className="card-container">
       <div>
         <img
           src={defaultProduct}
           alt={`${product.brand} ${product.model}`}
-          style={{
-            display: "flex",
-            borderRadius: "4px 4px 0 0",
-            maxWidth: "100%",
-            height: "100%",
-          }}
+          className="card-image"
         />
+        <button
+          className="card-edit-btn"
+          onClick={() => {
+            navigate(`/products/update/${product.id}`);
+          }}
+        >
+          <i data-feather="menu" id="my-menu-icon"></i>
+        </button>
+        <button className="card-delete-btn" onClick={togglePopup}>
+          <i data-feather="trash-2" id="my-trash-icon"></i>
+        </button>
       </div>
-      <h3
-        style={{
-          color: "white",
-          backgroundColor: "#B8860B",
-          width: "100%",
-          padding: "5px 0 5px 0",
-          textAlign: "center",
-          fontSize: "20px",
-          fontWeight: "bold",
-          marginBottom: "10px",
-        }}
-      >
-        {product.name}
-      </h3>
-      <p>
-        <strong>Brand: </strong>
-        {product.brand}
+      <h3 className="card-title">{product.name}</h3>
+      <div className="card-info">
+        <p>
+          <strong>Brand: </strong>
+          <span className="card-span">{product.brand}</span>
+        </p>
+        <p>
+          <strong>Model: </strong>
+          <span className="card-span">{product.model}</span>
+        </p>
+        <p>
+          <strong>Color: </strong>
+          <span className="card-span">{product.color}</span>
+        </p>
+      </div>
+      <p className="card-info-center">
+        <strong>{formattedPrice}</strong>
       </p>
-      <p>
-        <strong>Model: </strong>
-        {product.model}
-      </p>
-      <p>
-        <strong>Color: </strong>
-        {product.color}
-      </p>
-      <p
-        style={{
-          marginBottom: "20px",
-        }}
-      >
-        {formattedPrice}
-      </p>
+
+      {showPopup && (
+        <DeletePopup
+          showPopup={showPopup}
+          setShowPopup={setShowPopup}
+          product={product}
+        />
+      )}
     </Container>
   );
 };

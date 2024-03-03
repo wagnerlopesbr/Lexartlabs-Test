@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const RadioButtonInput = styled.input`
-  appearance: none;
   width: 20px;
   height: 20px;
   border: 2px solid #ccc;

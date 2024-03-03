@@ -3,14 +3,14 @@ import { Form, Formik } from "formik";
 import { Input } from "./Input";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import Footer from "./styledComponents/login/Footer";
-import Container from "./styledComponents/login/Container";
-import Content from "./styledComponents/login/Content";
-import Row from "./styledComponents/login/Row";
-import Button from "./styledComponents/login/Button";
-import RadioButtonWrapper from "./styledComponents/login/RadioButtonWrapper.jsx";
-import RadioButtonInput from "./styledComponents/login/RadioButtonInput";
-import RadioButtonLabel from "./styledComponents/login/RadioButtonLabel";
+import Footer from "./styledComponents/Login/Footer";
+import Container from "./styledComponents/Login/Container";
+import Content from "./styledComponents/Login/Content";
+import Row from "./styledComponents/Login/Row";
+import Button from "./styledComponents/Login/Button";
+import RadioButtonWrapper from "./styledComponents/Login/RadioButtonWrapper.jsx";
+import RadioButtonInput from "./styledComponents/Login/RadioButtonInput";
+import RadioButtonLabel from "./styledComponents/Login/RadioButtonLabel";
 
 const RadioButton = ({ label, ...props }) => (
   <RadioButtonWrapper>
