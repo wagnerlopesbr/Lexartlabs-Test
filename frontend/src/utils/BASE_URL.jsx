@@ -1,3 +1,3 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "lexartlabs-test-backend.vercel.app";
 
 export default BASE_URL;
