@@ -2,7 +2,7 @@ import feather from "feather-icons";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-const Grid = ({ data, search }) => {
+const Grid = ({ data, search, updateProducts }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
@@ -26,7 +26,11 @@ const Grid = ({ data, search }) => {
         }}
       >
         {filteredProducts.map((product) => (
-          <Card key={product.id} product={product} />
+          <Card
+            key={product.id}
+            product={product}
+            updateProducts={updateProducts}
+          />
         ))}
       </div>
     </div>

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Grid from "./Grid";
 import SearchBar from "./SearchBar";
 import axios from "axios";
 import "../css/Body.css";
 import addIcon from "../utils/images/add-icon.png";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../utils/BASE_URL.jsx";
 
 const Body = () => {
   const navigate = useNavigate();
@@ -12,10 +13,15 @@ const Body = () => {
   const [search, setSearch] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
   const [animation, setAnimation] = useState(false);
+  const token = localStorage.getItem("token");
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/products");
+      const response = await axios.get(`${BASE_URL}/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setProducts(response.data);
     } catch (error) {
       console.error(error);
@@ -39,11 +45,20 @@ const Body = () => {
     setSearch(searchValue);
   };
 
+  const updateProducts = async () => {
+    await fetchProducts();
+  };
+
   return (
     <div className="body-container">
       <SearchBar onSearchChange={handleSearchChange} />
       <div style={{ marginTop: "20px" }}>
-        <Grid data={products} search={search} selectedFilter={selectedFilter} />
+        <Grid
+          data={products}
+          search={search}
+          selectedFilter={selectedFilter}
+          updateProducts={updateProducts}
+        />
       </div>
       <div>
         <button className="add-btn">

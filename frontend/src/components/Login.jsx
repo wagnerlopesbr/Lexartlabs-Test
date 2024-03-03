@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Formik } from "formik";
 import { Input } from "./Input";
 import * as Yup from "yup";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "./styledComponents/Login/Footer";
 import Container from "./styledComponents/Login/Container";
@@ -11,6 +12,7 @@ import Button from "./styledComponents/Login/Button";
 import RadioButtonWrapper from "./styledComponents/Login/RadioButtonWrapper.jsx";
 import RadioButtonInput from "./styledComponents/Login/RadioButtonInput";
 import RadioButtonLabel from "./styledComponents/Login/RadioButtonLabel";
+import BASE_URL from "../utils/BASE_URL.jsx";
 
 const RadioButton = ({ label, ...props }) => (
   <RadioButtonWrapper>
@@ -21,7 +23,7 @@ const RadioButton = ({ label, ...props }) => (
 
 function Login() {
   const [action, setAction] = useState("");
-  console.log("ACTION:", action);
+  console.log("action:", action);
   const navigate = useNavigate();
   const initialValues = {
     email: "",
@@ -43,15 +45,56 @@ function Login() {
       .required("Password is required"),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
-    setSubmitting(false);
+  const handleLogin = async (values, { setSubmitting }) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/login`, values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const { data, token } = response.data;
+      if (token) {
+        localStorage.setItem("token", token);
+        navigate("/home");
+      } else {
+        console.error("No token received");
+      }
+    } catch (error) {
+      console.error("Login error: ", error);
+      window.alert("Invalid email or password");
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  const handleRegister = async (values, { resetForm, setSubmitting }) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/users/insert`, values);
+      console.log("response:", response);
+      window.alert("User registered successfully.");
+      resetForm();
+    } catch (error) {
+      console.error("Register error: ", error);
+      window.alert(
+        "Something went wrong. \nInvalid data or user already exists. \nPlease try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Container>
       <Content>
         <Formik
-          onSubmit={handleSubmit}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            console.log("onSubmit values:", values);
+            if (action === "register") {
+              handleRegister(values, { setSubmitting, resetForm });
+            } else {
+              handleLogin(values, { setSubmitting });
+            }
+          }}
           initialValues={initialValues}
           validationSchema={validationSchema}
         >
@@ -94,26 +137,8 @@ function Login() {
                     marginTop: "10px",
                   }}
                 >
-                  <Button
-                    type="button"
-                    disabled={action === "register" ? isSubmitting : true}
-                    style={{
-                      backgroundColor: action === "register" ? "green" : "gray",
-                    }}
-                  >
-                    Register
-                  </Button>
-                  <Button
-                    type="submit"
-                    disabled={action === "login" ? isSubmitting : true}
-                    style={{
-                      backgroundColor: action === "login" ? "green" : "gray",
-                    }}
-                    onClick={() => {
-                      navigate("/home");
-                    }}
-                  >
-                    Login
+                  <Button type="submit">
+                    {action === "register" ? "Register" : "Login"}
                   </Button>
                 </div>
               </Footer>

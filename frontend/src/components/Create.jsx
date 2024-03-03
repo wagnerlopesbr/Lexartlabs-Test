@@ -11,12 +11,14 @@ import Container from "./styledComponents/Edit/Container.jsx";
 import Content from "./styledComponents/Edit/Content.jsx";
 import Row from "./styledComponents/Edit/Row.jsx";
 import Button from "./styledComponents/Edit/Button.jsx";
+import BASE_URL from "../utils/BASE_URL.jsx";
 
 function Create() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+  const token = localStorage.getItem("token");
   const initialValues = {
     brand_id: "",
     model_id: "",
@@ -26,8 +28,12 @@ function Create() {
 
   const fetchProducts = async () => {
     try {
-      const products = await axios.get("http://localhost:8000/products");
-      setProducts(products.data);
+      const response = await axios.get(`${BASE_URL}/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProducts(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -35,8 +41,12 @@ function Create() {
 
   const fetchBrands = async () => {
     try {
-      const brands = await axios.get("http://localhost:8000/brand");
-      setBrands(brands.data);
+      const response = await axios.get(`${BASE_URL}/brand`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setBrands(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -44,8 +54,12 @@ function Create() {
 
   const fetchModels = async () => {
     try {
-      const models = await axios.get("http://localhost:8000/model");
-      setModels(models.data);
+      const response = await axios.get(`${BASE_URL}/model`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setModels(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -60,13 +74,15 @@ function Create() {
 
   useEffect(() => {}, [products, brands, models]);
 
-  const handleCreate = async (values) => {
+  const handleCreate = async (values, { resetForm }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:8000/products/insert",
-        values
-      );
+      const response = await axios.post(`${BASE_URL}/products/insert`, values, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log("response:", response);
+      resetForm();
     } catch (error) {
       console.error(error);
     }
@@ -76,7 +92,7 @@ function Create() {
     <Container>
       <Content>
         <Formik initialValues={initialValues}>
-          {({ values, setFieldValue, handleSubmit }) => (
+          {({ values, setFieldValue, handleSubmit, resetForm }) => (
             <Form style={{ width: "90%" }}>
               <Row>
                 <Field
@@ -143,7 +159,7 @@ function Create() {
                   <Button
                     type="button"
                     onClick={() => {
-                      handleCreate(values);
+                      handleCreate(values, { resetForm });
                     }}
                   >
                     Create

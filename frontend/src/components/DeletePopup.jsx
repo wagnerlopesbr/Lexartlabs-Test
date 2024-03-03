@@ -3,8 +3,15 @@ import feather from "feather-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/DeletePopup.css";
+import BASE_URL from "../utils/BASE_URL.jsx";
 
-export default function DeletePopup({ showPopup, setShowPopup, product }) {
+export default function DeletePopup({
+  showPopup,
+  setShowPopup,
+  product,
+  updateProducts,
+}) {
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   useEffect(() => {
     feather.replace();
@@ -17,9 +24,15 @@ export default function DeletePopup({ showPopup, setShowPopup, product }) {
   const handleDelete = async (product) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/products/delete/${product.id}`
+        `${BASE_URL}/products/delete/${product.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log("response:", response);
+      updateProducts();
       setShowPopup(false);
     } catch (error) {
       console.error(error);

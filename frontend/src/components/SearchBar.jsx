@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import feather from "feather-icons";
 import "../css/SearchBar.css";
+import BASE_URL from "../utils/BASE_URL.jsx";
 
 const SearchBar = ({ onSearchChange }) => {
   const [search, setSearch] = useState("");
   const [brands, setBrands] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("");
+  const token = localStorage.getItem("token");
 
   const fetchBrands = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/brand");
+      const response = await axios.get(`${BASE_URL}/brand`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setBrands(response.data);
     } catch (error) {
       console.error(error);

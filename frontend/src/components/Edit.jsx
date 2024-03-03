@@ -11,6 +11,7 @@ import Container from "./styledComponents/Edit/Container.jsx";
 import Content from "./styledComponents/Edit/Content.jsx";
 import Row from "./styledComponents/Edit/Row.jsx";
 import Button from "./styledComponents/Edit/Button.jsx";
+import BASE_URL from "../utils/BASE_URL.jsx";
 
 function Edit() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ function Edit() {
 
   const fetchProducts = async () => {
     try {
-      const products = await axios.get("http://localhost:8000/products");
+      const products = await axios.get(`${BASE_URL}/products`);
       setProducts(products.data);
     } catch (error) {
       console.error(error);
@@ -30,7 +31,7 @@ function Edit() {
 
   const fetchBrands = async () => {
     try {
-      const brands = await axios.get("http://localhost:8000/brand");
+      const brands = await axios.get(`${BASE_URL}/brand`);
       setBrands(brands.data);
     } catch (error) {
       console.error(error);
@@ -39,7 +40,7 @@ function Edit() {
 
   const fetchModels = async () => {
     try {
-      const models = await axios.get("http://localhost:8000/model");
+      const models = await axios.get(`${BASE_URL}/model`);
       setModels(models.data);
     } catch (error) {
       console.error(error);
@@ -72,7 +73,7 @@ function Edit() {
   const handleEdit = async (id, values) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/products/update/${id}`,
+        `${BASE_URL}/products/update/${id}`,
         values
       );
       console.log("response:", response);

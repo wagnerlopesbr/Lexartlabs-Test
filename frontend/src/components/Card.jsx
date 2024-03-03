@@ -6,7 +6,7 @@ import feather from "feather-icons";
 import { useNavigate } from "react-router-dom";
 import DeletePopup from "./DeletePopup";
 
-const Card = ({ product }) => {
+const Card = ({ product, updateProducts }) => {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const formattedPrice = product.price.toLocaleString("pt-BR", {
@@ -66,6 +66,7 @@ const Card = ({ product }) => {
           showPopup={showPopup}
           setShowPopup={setShowPopup}
           product={product}
+          updateProducts={updateProducts}
         />
       )}
     </Container>
