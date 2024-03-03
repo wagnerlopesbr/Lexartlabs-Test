@@ -1,7 +1,6 @@
 const loginService = require("../services/login.service");
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
   try {
     const { email, password } = req.body;
     if (!email || !password) {

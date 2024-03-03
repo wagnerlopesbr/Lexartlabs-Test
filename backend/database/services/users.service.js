@@ -85,9 +85,18 @@ const findByEmail = async (email) => {
 };
 
 const insert = async (user) => {
-  const { name, email, password } = user;
+  const { email, password } = user;
   try {
-    const newUser = await db.Users.create({ name, email, password });
+    const userExists = await db.Users.findOne({ where: { email } });
+    if (userExists) {
+      return {
+        status: 400,
+        data: {
+          message: "User already exists",
+        },
+      };
+    }
+    const newUser = await db.Users.create({ email, password });
     if (!newUser) {
       return {
         status: 400,
@@ -114,7 +123,7 @@ const insert = async (user) => {
 };
 
 const update = async (id, user) => {
-  const { name, email, password } = user;
+  const { email, password } = user;
   try {
     const userToUpdate = await db.Users.findByPk(id);
     if (!userToUpdate) {
@@ -125,7 +134,7 @@ const update = async (id, user) => {
         },
       };
     }
-    await userToUpdate.update({ name, email, password });
+    await userToUpdate.update({ email, password });
     return {
       status: 200,
       data: {

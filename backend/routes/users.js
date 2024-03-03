@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/", authValidate, usersController.findAll);
 router.get("/:id", authValidate, usersController.findById);
-router.post("/insert", authValidate, usersController.insert);
-router.put("/update", authValidate, usersController.update);
+router.post("/insert", usersController.insert);
+router.put("/update/:id", authValidate, usersController.update);
 
 module.exports = router;

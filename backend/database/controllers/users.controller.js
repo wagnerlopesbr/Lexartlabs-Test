@@ -41,8 +41,9 @@ const insert = async (req, res) => {
 
 const update = async (req, res) => {
   try {
+    const { id } = req.params;
     const user = req.body;
-    const { status, data } = await usersService.update(user);
+    const { status, data } = await usersService.update(id, user);
     return res.status(status).json(data);
   } catch (error) {
     return res.status(500).json({ message: "Users Update Error" });
