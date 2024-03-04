@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Formik, Field } from "formik";
 import { Input } from "./Input.jsx";
-// import * as Yup from "yup";
 import "../css/Edit.css";
 import feather from "feather-icons";
 import { useNavigate, useParams } from "react-router-dom";
@@ -102,22 +101,10 @@ function Edit() {
     navigate("/home");
   };
 
-  // const validationSchema = Yup.object().shape({
-  //   brand_id: Yup.number().required("Brand is required"),
-  //   model_id: Yup.number().required("Model is required"),
-  //   color: Yup.string().required("Color is required"),
-  //   price: Yup.number()
-  //     .typeError("Price must be a valid number")
-  //     .required("Price is required"),
-  // });
-
   return (
     <Container>
       <Content>
-        <Formik
-          initialValues={initialValues}
-          // validationSchema={validationSchema}
-        >
+        <Formik initialValues={initialValues}>
           {({ values, setFieldValue }) => (
             <Form style={{ width: "90%" }}>
               <Row>
@@ -166,17 +153,15 @@ function Edit() {
                   <option value="Black">Black</option>
                   <option value="White">White</option>
                   <option value="Red">Red</option>
+                  <option value="Green">Green</option>
+                  <option value="Pink">Pink</option>
+                  <option value="Yellow">Yellow</option>
                   <option value="Blue">Blue</option>
                   <option value="Golden">Golden</option>
+                  <option value="Silver">Silver</option>
+                  <option value="Gray">Gray</option>
                 </Field>
               </Row>
-              {/* <Row>
-                <Input
-                  name="color"
-                  required
-                  placeholder={productById ? productById.color : ""}
-                />
-              </Row> */}
               <Row>
                 <Input
                   name="price"
