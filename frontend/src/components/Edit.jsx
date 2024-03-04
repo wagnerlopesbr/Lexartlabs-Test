@@ -19,10 +19,15 @@ function Edit() {
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
+  const token = localStorage.getItem("token");
 
   const fetchProducts = async () => {
     try {
-      const products = await axios.get(`${BASE_URL}/products`);
+      const products = await axios.get(`${BASE_URL}/products`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setProducts(products.data);
     } catch (error) {
       console.error(error);
@@ -31,7 +36,11 @@ function Edit() {
 
   const fetchBrands = async () => {
     try {
-      const brands = await axios.get(`${BASE_URL}/brand`);
+      const brands = await axios.get(`${BASE_URL}/brand`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setBrands(brands.data);
     } catch (error) {
       console.error(error);
@@ -40,7 +49,11 @@ function Edit() {
 
   const fetchModels = async () => {
     try {
-      const models = await axios.get(`${BASE_URL}/model`);
+      const models = await axios.get(`${BASE_URL}/model`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setModels(models.data);
     } catch (error) {
       console.error(error);
