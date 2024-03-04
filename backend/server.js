@@ -6,7 +6,7 @@ const port = process.env.POSTGRES_PORT || 8000;
 app.get("/", (req, res) => {
   res.json({
     message:
-      "Welcome to the LexArtLabs Test API! by: @wagnerlopesbr (LinkedIn/GitHub)",
+      "Welcome to the LexartLabs Test API! by: @wagnerlopesbr (LinkedIn/GitHub)",
   });
 });
 
