@@ -2,7 +2,7 @@ require("dotenv").config();
 
 module.exports = {
   development: {
-    database: process.env.POSTGRES_DATABASE,
+    database: process.env.POSTGRES_DATABASE || "verceldb",
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     host: process.env.POSTGRES_HOST,
