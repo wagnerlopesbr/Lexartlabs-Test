@@ -19,15 +19,10 @@ function Edit() {
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
-  const token = localStorage.getItem("token");
 
   const fetchProducts = async () => {
     try {
-      const products = await axios.get(`${BASE_URL}/products`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const products = await axios.get(`${BASE_URL}/products`);
       setProducts(products.data);
     } catch (error) {
       console.error(error);
@@ -36,11 +31,7 @@ function Edit() {
 
   const fetchBrands = async () => {
     try {
-      const brands = await axios.get(`${BASE_URL}/brand`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const brands = await axios.get(`${BASE_URL}/brand`);
       setBrands(brands.data);
     } catch (error) {
       console.error(error);
@@ -49,11 +40,7 @@ function Edit() {
 
   const fetchModels = async () => {
     try {
-      const models = await axios.get(`${BASE_URL}/model`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const models = await axios.get(`${BASE_URL}/model`);
       setModels(models.data);
     } catch (error) {
       console.error(error);
@@ -153,30 +140,14 @@ function Edit() {
                     </option>
                   ))}
                 </Field>
-                <Field
-                  as="select"
-                  name="color"
-                  className="edit-select"
-                  onChange={(e) => setFieldValue("color", e.target.value)}
-                  value={values.model_id}
-                >
-                  <option value="" disabled>
-                    Colors
-                  </option>
-                  <option value="Black">Black</option>
-                  <option value="White">White</option>
-                  <option value="Red">Red</option>
-                  <option value="Blue">Blue</option>
-                  <option value="Golden">Golden</option>
-                </Field>
               </Row>
-              {/* <Row>
+              <Row>
                 <Input
                   name="color"
                   required
                   placeholder={productById ? productById.color : ""}
                 />
-              </Row> */}
+              </Row>
               <Row>
                 <Input
                   name="price"
