@@ -8,7 +8,7 @@ const config = envConfigs[env];
 const db = {};
 
 let sequelize;
-if (config.url) {
+if (config && config.url) {
   sequelize = new Sequelize(config.url, config);
 } else {
   sequelize = new Sequelize(
