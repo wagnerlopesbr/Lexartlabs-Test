@@ -2,11 +2,11 @@
   "name": "lexart-test-api",
   "version": "1.0.0",
   "description": "Lexart Test API",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'build TEST'",
-    "dev": "nodemon server.js"
+    "start": "node index.js",
+    "build": "echo 'build TEST API'",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "axios": "^1.6.7",
