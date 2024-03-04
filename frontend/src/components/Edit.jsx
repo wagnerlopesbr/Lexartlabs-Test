@@ -153,14 +153,30 @@ function Edit() {
                     </option>
                   ))}
                 </Field>
+                <Field
+                  as="select"
+                  name="color"
+                  className="edit-select"
+                  onChange={(e) => setFieldValue("color", e.target.value)}
+                  value={values.model_id}
+                >
+                  <option value="" disabled>
+                    Colors
+                  </option>
+                  <option value="Black">Black</option>
+                  <option value="White">White</option>
+                  <option value="Red">Red</option>
+                  <option value="Blue">Blue</option>
+                  <option value="Golden">Golden</option>
+                </Field>
               </Row>
-              <Row>
+              {/* <Row>
                 <Input
                   name="color"
                   required
                   placeholder={productById ? productById.color : ""}
                 />
-              </Row>
+              </Row> */}
               <Row>
                 <Input
                   name="price"
