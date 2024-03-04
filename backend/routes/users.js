@@ -3,9 +3,9 @@ const usersController = require("../database/controllers/users.controller");
 const { authValidate } = require("../middlewares/index");
 const router = Router();
 
-router.get("/", authValidate, usersController.findAll);
-router.get("/:id", authValidate, usersController.findById);
+router.get("/", usersController.findAll);
+router.get("/:id", usersController.findById);
 router.post("/insert", usersController.insert);
-router.put("/update/:id", authValidate, usersController.update);
+router.put("/update/:id", usersController.update);
 
 module.exports = router;
