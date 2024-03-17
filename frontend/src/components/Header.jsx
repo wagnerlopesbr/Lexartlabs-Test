@@ -1,7 +1,7 @@
 import linkedinIcon from "../utils/images/linkedin-icon.png";
 import githubIcon from "../utils/images/github-icon.png";
 import logoutIcon from "../utils/images/logout-icon.png";
-import lexartIcon from "../utils/images/lexart-icon.png";
+import cellphonecataloglogo from "../utils/images/cellphone-catalog-logo.png";
 import "../css/Header.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +20,11 @@ const Header = () => {
     <div className="header-container">
       <nav className="nav-bar">
         <div className="logo-container">
-          <a href="https://lexartlabs.com/" rel="noreferrer" target="_blank">
-            <img src={lexartIcon} height="20%" alt="lexart icon" />
-          </a>
+          <img
+            src={cellphonecataloglogo}
+            width="25%"
+            alt="cellphone-catalog-logo"
+          />
         </div>
 
         <div className="social-icons-container">

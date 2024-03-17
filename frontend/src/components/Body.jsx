@@ -53,12 +53,7 @@ const Body = () => {
     <div className="body-container">
       <SearchBar onSearchChange={handleSearchChange} />
       <div style={{ marginTop: "20px" }}>
-        <Grid
-          data={products}
-          search={search}
-          selectedFilter={selectedFilter}
-          updateProducts={updateProducts}
-        />
+        <Grid data={products} search={search} updateProducts={updateProducts} />
       </div>
       <div>
         <button className="add-btn">

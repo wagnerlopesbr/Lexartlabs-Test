@@ -10,6 +10,16 @@ const Grid = ({ data, search, updateProducts }) => {
   }, []);
 
   useEffect(() => {
+    if (search === "lowerprice") {
+      setFilteredProducts([...data].sort((a, b) => a.price - b.price));
+      console.log("lowerprice");
+      return;
+    } else if (search === "higherprice") {
+      setFilteredProducts([...data].sort((a, b) => b.price - a.price));
+      console.log("higherprice");
+      return;
+    }
+
     const filteredData = data.filter((product) =>
       product.name.toLowerCase().includes(search.toLowerCase())
     );

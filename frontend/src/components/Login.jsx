@@ -13,9 +13,13 @@ import RadioButtonWrapper from "./styledComponents/Login/RadioButtonWrapper.jsx"
 import RadioButtonInput from "./styledComponents/Login/RadioButtonInput";
 import RadioButtonLabel from "./styledComponents/Login/RadioButtonLabel";
 import BASE_URL from "../utils/BASE_URL.jsx";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 
 const RadioButton = ({ label, ...props }) => (
-  <RadioButtonWrapper>
+  <RadioButtonWrapper checked={props.checked}>
     <RadioButtonInput type="radio" {...props} />
     <RadioButtonLabel>{label}</RadioButtonLabel>
   </RadioButtonWrapper>
@@ -23,6 +27,9 @@ const RadioButton = ({ label, ...props }) => (
 
 function Login() {
   const [action, setAction] = useState("");
+  const [openLoginDialog, setLoginOpenDialog] = useState(false);
+  const [openRegisterErrorDialog, setRegisterErrorOpenDialog] = useState(false);
+  const [openRegisterDialog, setRegisterOpenDialog] = useState(false);
   console.log("action:", action);
   const navigate = useNavigate();
   const initialValues = {
@@ -61,7 +68,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Login error: ", error);
-      window.alert("Invalid email or password");
+      setLoginOpenDialog(true);
     } finally {
       setSubmitting(false);
     }
@@ -71,13 +78,11 @@ function Login() {
     try {
       const response = await axios.post(`${BASE_URL}/users/insert`, values);
       console.log("response:", response);
-      window.alert("User registered successfully.");
+      setRegisterOpenDialog(true);
       resetForm();
     } catch (error) {
       console.error("Register error: ", error);
-      window.alert(
-        "Something went wrong. \nInvalid data or user already exists. \nPlease try again."
-      );
+      setRegisterErrorOpenDialog(true);
     } finally {
       setSubmitting(false);
     }
@@ -100,28 +105,38 @@ function Login() {
         >
           {({ values, isSubmitting }) => (
             <Form style={{ width: "90%" }}>
-              <RadioButton
-                id="register"
-                name="option"
-                value="register"
-                label="Register"
-                onChange={() => {
-                  setAction("register");
+              <div
+                style={{
+                  textAlign: "center",
+                  paddingBottom: "20px",
                 }}
-              />
-              <RadioButton
-                id="login"
-                name="option"
-                value="login"
-                label="Login"
-                onChange={() => {
-                  setAction("login");
-                }}
-              />
-              <Row>
+              >
+                <RadioButton
+                  id="register"
+                  name="option"
+                  value="register"
+                  label="Register"
+                  checked={action === "register"}
+                  onChange={() => {
+                    setAction("register");
+                  }}
+                />
+                <RadioButton
+                  id="login"
+                  name="option"
+                  value="login"
+                  label="Login"
+                  checked={action === "login"}
+                  onChange={() => {
+                    setAction("login");
+                  }}
+                />
+              </div>
+
+              <Row style={{ paddingLeft: "25px" }}>
                 <Input name="email" required placeholder="your@email.com" />
               </Row>
-              <Row>
+              <Row style={{ paddingLeft: "25px" }}>
                 <Input
                   name="password"
                   required
@@ -137,7 +152,7 @@ function Login() {
                     marginTop: "10px",
                   }}
                 >
-                  <Button type="submit">
+                  <Button type="submit" style={{ width: "100px" }}>
                     {action === "register" ? "Register" : "Login"}
                   </Button>
                 </div>
@@ -146,6 +161,44 @@ function Login() {
           )}
         </Formik>
       </Content>
+
+      <Dialog open={openLoginDialog} onClose={() => setLoginOpenDialog(false)}>
+        <DialogTitle>Login Error</DialogTitle>
+        <DialogContent>
+          <p>All fields are required and user must exist.</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setLoginOpenDialog(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openRegisterErrorDialog}
+        onClose={() => setRegisterErrorOpenDialog(false)}
+      >
+        <DialogTitle>Register Error</DialogTitle>
+        <DialogContent>
+          <p>All fields are required and email must be unique.</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setRegisterErrorOpenDialog(false)}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openRegisterDialog}
+        onClose={() => setRegisterOpenDialog(false)}
+      >
+        <DialogTitle>Success!</DialogTitle>
+        <DialogContent>
+          <p>New user created!</p>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setRegisterOpenDialog(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

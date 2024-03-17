@@ -8,6 +8,7 @@ const SearchBar = ({ onSearchChange }) => {
   const [search, setSearch] = useState("");
   const [brands, setBrands] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
   const token = localStorage.getItem("token");
 
   const fetchBrands = async () => {
@@ -38,9 +39,21 @@ const SearchBar = ({ onSearchChange }) => {
     onSearchChange(e.target.value);
   };
 
+  const handleSort = (e) => {
+    if (e.target.value === "higherprice") {
+      setSelectedSort(e.target.value);
+      onSearchChange(e.target.value);
+    }
+    if (e.target.value === "lowerprice") {
+      setSelectedSort(e.target.value);
+      onSearchChange(e.target.value);
+    }
+  };
+
   const handleClear = () => {
     setSearch("");
     setSelectedFilter("");
+    setSelectedSort("");
     onSearchChange("");
   };
 
@@ -69,6 +82,16 @@ const SearchBar = ({ onSearchChange }) => {
             ))}
           </select>
         </div>
+        <select
+          className="filter-select"
+          value="sort"
+          name="sort"
+          onChange={handleSort}
+        >
+          <option value="">Sort</option>
+          <option value="higherprice">Higher Price</option>
+          <option value="lowerprice">Lower Price</option>
+        </select>
         <div>
           <button onClick={handleClear} className="clear-button">
             <i data-feather="rotate-ccw" id="my-rotate-icon"></i>
