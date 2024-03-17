@@ -6,7 +6,7 @@ const port = process.env.PORT || 8000;
 
 app.get("/", (req, res) => {
   res.send(
-    "Welcome to the LexartLabs Test API! by: @wagnerlopesbr (LinkedIn/GitHub)"
+    "Welcome to the Cell Phone Catalog API! by: @wagnerlopesbr (LinkedIn/GitHub)"
   );
 });
 

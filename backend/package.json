@@ -1,7 +1,7 @@
 {
-  "name": "lexart-test-api",
+  "name": "cellphone-catalog-api",
   "version": "1.0.0",
-  "description": "Lexart Test API",
+  "description": "Cell Phone Catalog API",
   "main": "index.js",
   "engines": {
     "node": "20.x"

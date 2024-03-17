@@ -13,6 +13,9 @@ module.exports = {
       {
         name: "Xiaomi",
       },
+      {
+        name: "Samsung",
+      },
     ]);
   },
 

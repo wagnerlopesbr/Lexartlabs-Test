@@ -15,14 +15,6 @@ module.exports = {
         email: "user2@email.com",
         password: "password2",
       },
-      {
-        email: "user3@email.com",
-        password: "password3",
-      },
-      {
-        email: "user4@email.com",
-        password: "password4",
-      },
     ]);
   },
 
