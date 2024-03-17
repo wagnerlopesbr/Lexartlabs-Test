@@ -16,10 +16,10 @@
 }
 
 .popup-content {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(243, 216, 216);
   border-radius: 8px;
   width: 250px;
-  height: 70px;
+  height: 80px;
   padding: 16px;
 }
 

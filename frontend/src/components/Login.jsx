@@ -17,6 +17,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import bgimg from "../utils/images/bg.gif";
 
 const RadioButton = ({ label, ...props }) => (
   <RadioButtonWrapper checked={props.checked}>
@@ -89,7 +90,15 @@ function Login() {
   };
 
   return (
-    <Container>
+    <Container
+      style={{
+        backgroundImage: `url(${bgimg})`,
+        backgroundAttachment: "fixed",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <Content>
         <Formik
           onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -134,7 +143,14 @@ function Login() {
               </div>
 
               <Row style={{ paddingLeft: "25px" }}>
-                <Input name="email" required placeholder="your@email.com" />
+                <Input
+                  name="email"
+                  required
+                  placeholder="your@email.com"
+                  style={{
+                    border: "none",
+                  }}
+                />
               </Row>
               <Row style={{ paddingLeft: "25px" }}>
                 <Input
@@ -142,6 +158,9 @@ function Login() {
                   required
                   type="password"
                   placeholder="enter your password"
+                  style={{
+                    border: "none",
+                  }}
                 />
               </Row>
               <Footer>

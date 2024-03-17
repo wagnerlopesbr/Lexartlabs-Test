@@ -44,6 +44,9 @@ export default function DeletePopup({
       <div className="popup-content">
         <h2 className="popup-title">CONFIRM DELETION?</h2>
         <div className="popup-buttons">
+          <button className="popup-delete-button" onClick={handleClosePopup}>
+            <i data-feather="x" className="popup-icon"></i>
+          </button>
           <button
             className="popup-confirm-button"
             onClick={() => {
@@ -52,9 +55,6 @@ export default function DeletePopup({
             }}
           >
             <i data-feather="check" className="popup-icon"></i>
-          </button>
-          <button className="popup-delete-button" onClick={handleClosePopup}>
-            <i data-feather="x" className="popup-icon"></i>
           </button>
         </div>
       </div>

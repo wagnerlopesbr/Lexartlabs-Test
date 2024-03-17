@@ -8,7 +8,12 @@ const Content = styled.div`
   justify-content: center;
   box-shadow: 0 1px 2px;
   padding: 5vh 0;
-  background-color: #d1d1d1;
+  background: linear-gradient(
+    to bottom,
+    #498aad -80%,
+    #bde5f0 50%,
+    #498aad 180%
+  );
 `;
 
 export default Content;

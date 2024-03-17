@@ -215,6 +215,7 @@ function Edit() {
                     placeholder={
                       productById ? formatPrice(productById.price) : ""
                     }
+                    style={{ border: "none" }}
                   />
                 </Row>
                 <Footer>

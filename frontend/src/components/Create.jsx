@@ -194,6 +194,7 @@ function Create() {
                     type="number"
                     required
                     placeholder="How much in BRL?"
+                    style={{ border: "none" }}
                   />
                 </Row>
                 <Footer>
