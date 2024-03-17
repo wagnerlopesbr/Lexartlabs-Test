@@ -18,6 +18,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import bgimg from "../utils/images/bg.gif";
+import cellphonecataloglogo from "../utils/images/cellphone-catalog-logo.png";
 
 const RadioButton = ({ label, ...props }) => (
   <RadioButtonWrapper checked={props.checked}>
@@ -97,8 +98,20 @@ function Login() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        paddingTop: "120px",
       }}
     >
+      <div
+        style={{
+          backgroundColor: "transparent",
+          paddingBottom: "40px",
+        }}
+      >
+        <img src={cellphonecataloglogo} width="500px" />
+      </div>
       <Content>
         <Formik
           onSubmit={(values, { setSubmitting, resetForm }) => {
