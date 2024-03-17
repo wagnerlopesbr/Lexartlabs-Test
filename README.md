@@ -1,6 +1,6 @@
-# Lexartlabs-Test
+# Cell Phone Catalog
 
-It's a Cell Phone Catalog! You need to log in to see the products, but you can also edit or delete them. (but remember: You need to be loged!).
+You need to log in to see the products, but you can also edit or delete them. (but remember: You need to be loged!).
 
 ## CRUD Functions:
 - CREATE -> Insert all parameters to create a new product (you can mix brand with other brand models; an easter egg? maybe)
