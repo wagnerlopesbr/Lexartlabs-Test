@@ -83,7 +83,7 @@ const SearchBar = ({ onSearchChange }) => {
           </select>
         </div>
         <select
-          className="filter-select"
+          className="sort-select"
           value="sort"
           name="sort"
           onChange={handleSort}
