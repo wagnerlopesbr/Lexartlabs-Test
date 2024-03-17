@@ -22,7 +22,7 @@ const Header = () => {
         <div className="logo-container">
           <img
             src={cellphonecataloglogo}
-            width="25%"
+            width="150px"
             alt="cellphone-catalog-logo"
           />
         </div>
